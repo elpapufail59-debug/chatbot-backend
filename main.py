@@ -4,15 +4,14 @@ from pydantic import BaseModel
 from openai import OpenAI
 import os
 
-# Cliente OpenAI (forma nueva)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = FastAPI()
 
-# CORS (obligatorio para celular)
+# 🔥 CORS BIEN CONFIGURADO
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # ← ESTO ES CLAVE
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -33,7 +32,4 @@ def chat(mensaje: Mensaje):
             {"role": "user", "content": mensaje.message}
         ]
     )
-
-    return {
-        "reply": response.choices[0].message.content
-    }
+    return {"reply": response.choices[0].message.content}
