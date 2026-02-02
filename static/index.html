@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Chatbot</title>
+</head>
+<body>
+
+<h2>Mi Chatbot 🤖</h2>
+
+<input id="mensaje" placeholder="Escribe algo">
+<button onclick="enviar()">Enviar</button>
+
+<p id="respuesta"></p>
+
+<script>
+function enviar() {
+    const texto = document.getElementById("mensaje").value;
+
+    document.getElementById("respuesta").innerText = "Pensando...";
+
+    fetch("https://chatbot-backend-1-94sn.onrender.com/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: texto })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("respuesta").innerText = data.reply;
+    })
+    .catch(() => {
+        document.getElementById("respuesta").innerText = "❌ Error";
+    });
+}
+</script>
+
+</body>
+</html>
