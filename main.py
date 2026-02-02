@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import openai
 import os
 
-# 🔑 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
+# 🔑 
 
 # En Render la pones como Environment Variable
 openai.api_key = os.getenv("OPENAI_API_KEY")
